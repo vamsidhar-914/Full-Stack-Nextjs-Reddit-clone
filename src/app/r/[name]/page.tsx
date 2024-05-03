@@ -1,4 +1,5 @@
 import { MiniCreatePost } from "@/components/MiniCreatePost";
+import { PostFeed } from "@/components/PostFeed";
 import { INFINITE_SCROLLING_PAGINATON_RESULTS } from "@/config";
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -21,6 +22,9 @@ export default async function subredditDetail({
           comments: true,
           subreddit: true,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
         take: INFINITE_SCROLLING_PAGINATON_RESULTS,
       },
     },
@@ -35,6 +39,10 @@ export default async function subredditDetail({
       </h1>
       <MiniCreatePost session={session} />
       {/* TODO: show posts in user feed */}
+      <PostFeed
+        initialPosts={subreddit.posts}
+        subredditName={subreddit.name}
+      />
     </div>
   );
 }

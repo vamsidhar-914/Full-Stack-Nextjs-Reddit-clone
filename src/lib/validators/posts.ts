@@ -9,4 +9,15 @@ export const postsValidator = z.object({
   content: z.any(),
 });
 
+export const postvotesValidator = z.object({
+  postId: z.string(),
+  voteType: z.enum(["UP", "DOWN"]),
+});
+
+export const commentsVoteValidator = z.object({
+  commentId: z.string(),
+  voteType: z.enum(["UP", "DOWN"]),
+});
+
 export type PostCreationRequest = z.infer<typeof postsValidator>;
+export type PostvotesValidator = z.infer<typeof postvotesValidator>;

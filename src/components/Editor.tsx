@@ -34,7 +34,7 @@ export function Editor({ subredditId }: { subredditId: string }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  // useCallback(This function is cahed so that it doesnot get redefined on every render)
+  // useCallback(This function is cached so that it doesnot get redefined on every render)
   const initializeEditor = useCallback(async () => {
     const EditorJS = (await import("@editorjs/editorjs")).default;
     const Header = (await import("@editorjs/header")).default;
