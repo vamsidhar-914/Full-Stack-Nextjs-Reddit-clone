@@ -2,13 +2,26 @@
 
 import { formatTimeToNow } from "@/lib/utils";
 import type { Post, User, Vote } from "@prisma/client";
-import { MessageSquare } from "lucide-react";
-import Link from "next/link";
+import { Loader2, MessageSquare } from "lucide-react";
 import { useRef } from "react";
-import { EditorOutput } from "./EditorOutput";
 import { PostVoteClient } from "./post-vote/PostVoteClient";
+// import { EditorOutput } from "./EditorOutput";
+import dynamic from "next/dynamic";
 
 type PartialVote = Pick<Vote, "type">;
+
+const Loading = () => <Loader2 className='ml-56 w-8 h-8 animate-spin' />;
+
+const EditorOutput = dynamic(
+  async () => {
+    const module = await import("./EditorOutput"); // Adjust the import path accordingly
+    return module.EditorOutput;
+  },
+  {
+    ssr: false,
+    loading: () => <Loading />, // Specify the Loading Component
+  }
+);
 
 export function Post({
   subredditName,

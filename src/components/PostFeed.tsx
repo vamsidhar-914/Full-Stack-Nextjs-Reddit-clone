@@ -6,8 +6,10 @@ import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Post } from "./Post";
+import { Loader2 } from "lucide-react";
+import { PostFeedServer } from "./PostFeedServer";
 
 export function PostFeed({
   initialPosts,

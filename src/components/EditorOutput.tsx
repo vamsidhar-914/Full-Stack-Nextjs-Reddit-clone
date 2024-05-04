@@ -1,5 +1,8 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { Suspense } from "react";
 
 const Output = dynamic(
   async () => (await import("editorjs-react-renderer")).default,
@@ -22,12 +25,14 @@ const renderers = {
 
 export function EditorOutput({ content }: { content: any }) {
   return (
-    <Output
-      data={content}
-      style={style}
-      className='text-sm'
-      renderers={renderers}
-    />
+    <Suspense fallback={<p>Loading...</p>}>
+      <Output
+        data={content}
+        style={style}
+        className='text-sm'
+        renderers={renderers}
+      />
+    </Suspense>
   );
 }
 

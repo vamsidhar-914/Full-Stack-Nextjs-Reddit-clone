@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { redis } from "@/lib/redis";
 import { postvotesValidator } from "@/lib/validators/posts";
 import { CachedPost } from "@/types/redis";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const CACHE_AFTER_UPVOTES = 1;
@@ -26,6 +27,7 @@ export async function PATCH(req: Request) {
         id: postId,
       },
       include: {
+        subreddit: true,
         author: true,
         votes: true,
       },

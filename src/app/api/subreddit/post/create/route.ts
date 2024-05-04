@@ -1,6 +1,7 @@
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { postsValidator } from "@/lib/validators/posts";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 export async function POST(req: Request) {
@@ -17,6 +18,11 @@ export async function POST(req: Request) {
         userId: session.user.id,
       },
     });
+    const subreddit = await db.subreddit.findUnique({
+      where: {
+        id: subredditId,
+      },
+    });
     if (!subscriptionExists) {
       return new Response("Subscribe to the community to create the post", {
         status: 400,
@@ -30,6 +36,7 @@ export async function POST(req: Request) {
         subredditId,
       },
     });
+
     return new Response("Successfully created");
   } catch (error) {
     if (error instanceof z.ZodError) {
