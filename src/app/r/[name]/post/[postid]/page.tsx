@@ -10,6 +10,9 @@ import { ArrowBigDown, ArrowBigUp, Loader2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
+import { getAuthSession } from "@/lib/auth";
+import { PostComment } from "@/components/PostComment";
+import { CommentsSection } from "@/components/CommentsSection";
 
 // export const dynamic = "force-dynamic";
 // export const fetchCache = "force-no-store";
@@ -76,6 +79,10 @@ export default async function page({
             {post?.title ?? cachedPost.title}
           </h1>
           <EditorOutput content={post?.content ?? cachedPost.content} />
+
+          <Suspense fallback={<Loader2 className='h-5 2-5 animate-spin' />}>
+            <CommentsSection postId={post?.id ?? cachedPost.id} />
+          </Suspense>
         </div>
       </div>
     </div>

@@ -29,6 +29,7 @@ export function Post({
   commentsAmount,
   votesAmt,
   currentVote,
+  isFetching,
 }: {
   subredditName: string;
   post: Post & {
@@ -38,8 +39,10 @@ export function Post({
   commentsAmount: number;
   votesAmt: number;
   currentVote?: PartialVote;
+  isFetching: boolean;
 }) {
   const pRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className='rounded-md bg-white shadow'>
       <div className='px-6 py-4 flex justify-between'>

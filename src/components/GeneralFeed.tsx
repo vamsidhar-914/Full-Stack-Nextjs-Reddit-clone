@@ -4,26 +4,27 @@ import { PostFeed } from "./PostFeed";
 import { getAuthSession } from "@/lib/auth";
 import { Session } from "@prisma/client";
 import { cache } from "@/lib/cache";
+import { revalidatePath } from "next/cache";
 
-// const getGeneralFeed = cache(
-//   async () => {
-//     await wait(2000);
-//     return db.post.findMany({
-//       orderBy: {
-//         createdAt: "desc",
-//       },
-//       include: {
-//         votes: true,
-//         author: true,
-//         comments: true,
-//         subreddit: true,
-//       },
-//       take: INFINITE_SCROLLING_PAGINATON_RESULTS,
-//     });
-//   },
-//   ["/", "getGeneralPostsData"],
-//   { revalidate: 60 * 60 * 24 }
-// );
+const getGeneralFeed = cache(
+  async () => {
+    await wait(2000);
+    return db.post.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        votes: true,
+        author: true,
+        comments: true,
+        subreddit: true,
+      },
+      take: INFINITE_SCROLLING_PAGINATON_RESULTS,
+    });
+  },
+  ["/", "getGeneralPostsData"],
+  { revalidate: 60 * 60 * 24 }
+);
 
 export async function GeneralFeed() {
   const posts = await db.post.findMany({
