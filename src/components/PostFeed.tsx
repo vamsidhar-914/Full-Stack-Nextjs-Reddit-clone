@@ -103,7 +103,7 @@ export function PostFeed({
           );
         }
       })}
-      <button
+      {/* <button
         onClick={() => fetchNextPage()}
         disabled={isFetchingNextPage}
       >
@@ -114,7 +114,7 @@ export function PostFeed({
         ) : (
           "nothing to load"
         )}
-      </button>
+      </button> */}
     </ul>
   );
 }

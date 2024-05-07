@@ -31,7 +31,7 @@ export default async function submit({
       </div>
       {/* form */}
       <Editor subredditId={subreddit.id} />
-      <div className='w-full flex justify-end'>
+      {/* <div className='w-full flex justify-end'>
         <Button
           type='submit'
           className='w-full'
@@ -39,7 +39,7 @@ export default async function submit({
         >
           Post
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

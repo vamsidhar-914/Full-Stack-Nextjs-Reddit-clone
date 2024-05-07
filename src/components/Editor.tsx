@@ -202,6 +202,16 @@ export function Editor({ subredditId }: { subredditId: string }) {
           </div>
         </form>
       </div>
+      <div className='w-full flex justify-end'>
+        <Button
+          isLoading={isPending}
+          type='submit'
+          className='w-full'
+          form='subreddit-post-form'
+        >
+          Post
+        </Button>
+      </div>
     </>
   );
 }

@@ -44,6 +44,8 @@ function CustomImageRenderer({ data }: any) {
         alt='image'
         className='object-contain'
         fill
+        priority={false}
+        quality={75}
         src={src}
       />
     </div>

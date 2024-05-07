@@ -65,7 +65,7 @@ export function Post({
                 <span className='px-1'>*</span>
               </>
             )}
-            <span>Posted by u/{post.author.name}</span>{" "}
+            <span>Posted by u/{post.author.username}</span>{" "}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
           <a href={`/r/${subredditName}/post/${post.id}`}>
